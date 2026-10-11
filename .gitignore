@@ -1,0 +1,14 @@
+# secrets
+.env
+*.env.local
+# python
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+# node
+node_modules/
+frontend/dist/
+# model artefact is reproducible (python -m ml.train); keep metrics json, ignore binary
+ml/artifacts/*.joblib

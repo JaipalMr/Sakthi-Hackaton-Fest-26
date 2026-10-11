@@ -1,0 +1,282 @@
+{
+  "trained_at_utc": "2026-10-11T01:46:15+00:00",
+  "sklearn_version": "1.9.1",
+  "selected_model": "hist_gradient_boosting",
+  "features": [
+    "stop_id",
+    "event_phase",
+    "weather_condition",
+    "clock_minutes",
+    "day_of_week",
+    "festival_day",
+    "minutes_since_start",
+    "minutes_to_end",
+    "temperature",
+    "rainfall",
+    "route_closed",
+    "lag_passengers",
+    "available_buses",
+    "average_bus_capacity",
+    "route_travel_time",
+    "festival_attendance",
+    "stop_capacity",
+    "service_capacity_est"
+  ],
+  "target": "target_passenger_demand",
+  "data_is_synthetic": true,
+  "split": {
+    "method": "chronological by unique timestamp (60/20/20); boundaries fall between festivals",
+    "train_rows": 9000,
+    "validation_rows": 3000,
+    "test_rows": 3000,
+    "festival_roles": {
+      "FEST-2025-01": "train",
+      "FEST-2025-02": "train",
+      "FEST-2025-03": "train",
+      "FEST-2025-04": "validation",
+      "FEST-2025-05": "test"
+    },
+    "festival_names": {
+      "FEST-2025-01": "Winter Lights (synthetic)",
+      "FEST-2025-02": "Spring Carnival (synthetic)",
+      "FEST-2025-03": "Monsoon Music Fair (synthetic)",
+      "FEST-2025-04": "Harvest Festival (synthetic)",
+      "FEST-2025-05": "Autumn Lantern Festival (synthetic)"
+    }
+  },
+  "final_fit": "selected model refit on train+validation; test set used once",
+  "baselines": {
+    "baseline_persistence": {
+      "description": "predict the previous slot's observed passenger count",
+      "val": {
+        "mae": 8.111,
+        "rmse": 17.0816373141843
+      },
+      "test": {
+        "mae": 8.060333333333332,
+        "rmse": 17.003774090869747
+      }
+    },
+    "baseline_stop_phase_mean": {
+      "description": "training-set mean demand per stop x event phase",
+      "val": {
+        "mae": 10.316101989096664,
+        "rmse": 22.614045170667787
+      },
+      "test": {
+        "mae": 10.257021849564438,
+        "rmse": 21.743289782002975
+      }
+    }
+  },
+  "candidates": {
+    "hist_gradient_boosting": {
+      "validation": {
+        "mae": 5.19448017460045,
+        "rmse": 9.7874691643177
+      }
+    },
+    "random_forest": {
+      "validation": {
+        "mae": 5.355123415637875,
+        "rmse": 10.936987425587159
+      }
+    }
+  },
+  "test_one_step": {
+    "mae": 5.367823856923812,
+    "rmse": 9.657538110435574
+  },
+  "horizon_metrics": [
+    {
+      "horizon": 1,
+      "n": 3000,
+      "model_mae": 5.3678238569238115,
+      "model_rmse": 9.657538110435574,
+      "persistence_mae": 8.060333333333332,
+      "persistence_rmse": 17.003774090869747,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7753333333333333
+    },
+    {
+      "horizon": 2,
+      "n": 2940,
+      "model_mae": 5.908175711980022,
+      "model_rmse": 11.972950683540954,
+      "persistence_mae": 12.332312925170068,
+      "persistence_rmse": 27.87560438318587,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7812925170068027
+    },
+    {
+      "horizon": 3,
+      "n": 2880,
+      "model_mae": 6.4446292744678155,
+      "model_rmse": 13.579675637292915,
+      "persistence_mae": 16.580555555555556,
+      "persistence_rmse": 36.667992400275566,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7704861111111111
+    },
+    {
+      "horizon": 4,
+      "n": 2820,
+      "model_mae": 6.941244177067199,
+      "model_rmse": 14.446014133833353,
+      "persistence_mae": 20.472695035460994,
+      "persistence_rmse": 43.527398235629946,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7624113475177305
+    },
+    {
+      "horizon": 5,
+      "n": 2760,
+      "model_mae": 7.340779218308578,
+      "model_rmse": 15.108708148488908,
+      "persistence_mae": 23.891666666666666,
+      "persistence_rmse": 48.70082060434128,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7557971014492754
+    },
+    {
+      "horizon": 6,
+      "n": 2700,
+      "model_mae": 7.751341210618855,
+      "model_rmse": 15.720272502053536,
+      "persistence_mae": 26.573703703703703,
+      "persistence_rmse": 52.381177705143074,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7474074074074074
+    },
+    {
+      "horizon": 7,
+      "n": 2640,
+      "model_mae": 8.105424937874828,
+      "model_rmse": 16.451331944615315,
+      "persistence_mae": 28.93219696969697,
+      "persistence_rmse": 55.05646206533358,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7556818181818182
+    },
+    {
+      "horizon": 8,
+      "n": 2580,
+      "model_mae": 8.548020148895015,
+      "model_rmse": 17.595548728677805,
+      "persistence_mae": 30.642248062015504,
+      "persistence_rmse": 56.791816885148855,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7546511627906977
+    },
+    {
+      "horizon": 9,
+      "n": 2520,
+      "model_mae": 9.011327199526622,
+      "model_rmse": 19.083612022925188,
+      "persistence_mae": 31.7781746031746,
+      "persistence_rmse": 57.69388636423728,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7587301587301587
+    },
+    {
+      "horizon": 10,
+      "n": 2460,
+      "model_mae": 9.443833672316698,
+      "model_rmse": 20.82507689735301,
+      "persistence_mae": 32.454471544715446,
+      "persistence_rmse": 57.76361276227097,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.759349593495935
+    },
+    {
+      "horizon": 11,
+      "n": 2400,
+      "model_mae": 9.845133996317111,
+      "model_rmse": 23.27929998294054,
+      "persistence_mae": 32.77166666666667,
+      "persistence_rmse": 57.543063584298906,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7645833333333333
+    },
+    {
+      "horizon": 12,
+      "n": 2340,
+      "model_mae": 10.14549384209857,
+      "model_rmse": 25.4890538428563,
+      "persistence_mae": 32.75299145299145,
+      "persistence_rmse": 56.88942641305885,
+      "interval_nominal_coverage": 0.8,
+      "interval_empirical_coverage_test": 0.7636752136752136
+    }
+  ],
+  "interval_method": "empirical 10th/90th percentile of relative validation residuals per horizon (recursive forecast); interval = pred +/- max(pred,10) * quantile; nominal 80%",
+  "intervals": {
+    "1": {
+      "q10": -0.30815793767190425,
+      "q90": 0.3754009074301246,
+      "n": 3000
+    },
+    "2": {
+      "q10": -0.33712731742110996,
+      "q90": 0.38372005573183193,
+      "n": 2940
+    },
+    "3": {
+      "q10": -0.3512864505510733,
+      "q90": 0.3886608273537538,
+      "n": 2880
+    },
+    "4": {
+      "q10": -0.36061738630404727,
+      "q90": 0.4039003997108905,
+      "n": 2820
+    },
+    "5": {
+      "q10": -0.36523808831744736,
+      "q90": 0.4149353027716065,
+      "n": 2760
+    },
+    "6": {
+      "q10": -0.36807126173770427,
+      "q90": 0.4243194807109849,
+      "n": 2700
+    },
+    "7": {
+      "q10": -0.3708311786785032,
+      "q90": 0.4310520706163987,
+      "n": 2640
+    },
+    "8": {
+      "q10": -0.37092996659254523,
+      "q90": 0.43137011197907427,
+      "n": 2580
+    },
+    "9": {
+      "q10": -0.37515938813654137,
+      "q90": 0.4310520706163987,
+      "n": 2520
+    },
+    "10": {
+      "q10": -0.3770403589585708,
+      "q90": 0.43137011197907427,
+      "n": 2460
+    },
+    "11": {
+      "q10": -0.3770403589585708,
+      "q90": 0.43554614687992177,
+      "n": 2400
+    },
+    "12": {
+      "q10": -0.3795892713045098,
+      "q90": 0.4346679243664988,
+      "n": 2340
+    }
+  },
+  "limitations": [
+    "Trained and evaluated only on SYNTHETIC data; real-world accuracy is unknown.",
+    "Only 5 simulated festivals: weak evidence of generalisation to new venues or event types.",
+    "Future weather, fleet plan, route times and closures are treated as known inputs (perfect forecast).",
+    "Multi-step forecasts are recursive; error grows with horizon.",
+    "Intervals are empirical and approximate; they are not guaranteed coverage."
+  ]
+}
